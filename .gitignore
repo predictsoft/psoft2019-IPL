@@ -1,0 +1,10 @@
+/service/config/dbconfig.js
+/service/config/psoft_config.js
+/service/config/jwtkey.js
+/service/node_modules/
+/service/psoftv3_logs/
+/service/web/node_modules
+/service/web/.idea
+/.idea
+/node_modules/
+/web/node_modules/

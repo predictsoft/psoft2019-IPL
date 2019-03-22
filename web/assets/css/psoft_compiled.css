@@ -1,0 +1,101 @@
+body {
+    padding-top: 50px;
+    background-color:#f2ece3  !important; 
+}
+
+.starter-template {
+	padding: 40px 15px;
+	text-align: center;
+}
+
+.blocks .btn-primary
+{
+	padding: 12px 50px;
+	border-radius: 1px;
+}
+.blocks {border-spacing: 5px;}
+
+.locked-panel {
+    background-color: #e2e8e8;
+}
+
+.navbar-custom {
+    background-color:#394245;
+    color:#000000;
+    border-radius:0;
+}
+
+.navbar-brand {
+    color:#FFFFFF !important;       /* color of logo text*/
+}
+
+.psoft-title {
+    font-family: 'dusha_plusregular', Fallback, sans-serif;
+    font-size: 1.2rem;
+}
+
+.psoft-euro-emphasis-text {
+    font-family: 'dusha_plusregular', Fallback, sans-serif;
+    font-size: 2.6rem;
+    text-transform: uppercase;
+}
+
+.psoft-submit-disabled-button {
+    background-color: gray !important;
+}
+
+.psoft-submit-button {
+    background-color: blue !important;
+}
+
+.navbar-default {
+    background-color:#0f4583;
+    background-image: none;
+    background-repeat: no-repeat;
+ }
+
+.navbar-link {
+    position: relative;
+    z-index: 1;
+}
+
+.team-logo-panel-container {
+    background-color: #f2ece3;
+}
+
+.locked-panel {
+    background-color: #b5b4b4;
+}
+
+.team-name-panel-header{
+    text-transform: uppercase;
+}
+
+.locked-team-name{
+    color: #bdb4b4;
+}
+
+.highlight-team {
+    text-transform: uppercase;
+}
+
+.btn-light-blue {
+    background-color: #82b1ff !important;
+    color: #fff !important;
+}
+
+@font-face {
+    font-family: 'dusha_plusregular';
+    src: url('dusha-regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'dusha_plusregular';
+    src: url('dusha-regular.woff'); /* IE9 Compat Modes */
+  }
+
+.myGrid {
+/*    width: 350px;
+    height: 340px;
+*/ 
+}

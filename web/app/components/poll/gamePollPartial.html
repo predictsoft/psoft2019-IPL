@@ -1,0 +1,122 @@
+<div class="container">
+        <div class="well" style="overflow: hidden">
+            <div class="row">
+                <!--Teams and poll button DIVs-->
+                <div class="col-sm-12">
+                    <!-- Poll and Prediction column-->
+                    <div class="text-center">
+                        <div class="h1 psoft-euro-emphasis-text">{{matchType}}</div>
+                        <div class="h4"></div>
+                    </div>
+                    <div class="alert alert-warning fade in" ng-show="display_announcement">
+                         <span class="pull"><span class="h3">Hidden prediction mode </span>[Predictions from other players for each game will be revealed once the match has been locked]<a class="close" data-dismiss="alert" aria-label="close">&times;</a></span>
+                     </div>
+                    <div class="alert alert-success" ng-show="showConfirmation">
+                        <span>Thank you,{{playerFirstName}}! Your prediction(s) have been submitted.</span>
+                    </div>
+                    <div class="alert alert-danger" ng-show="submitResponseERR">
+                        <span>{{submitResponseERR}}</span>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="alert alert-info col-sm-3 col-md-offset-5" style="padding-left: 22px;" ng-show="loadingGames">Loading games...<img src="/web/assets/img/loading.gif"></div>
+                        <div class="row" style="padding-left: 38px; padding-top: 10px; padding-bottom: 20px"><span class="label label-danger" ng-show="predErr">Please make a selection for available games</span></div>
+                        <!--Game list and voting buttons-->
+                        <div class="row h3 text-center" ng-show="matchDate">Games for {{matchDate | date:'MMM d, yyyy'}}</div>
+                        <div class="row h3 text-center" ng-hide="matchDate">Upcoming games</div>
+                        <div class="row h5 text-center">(<span class="h4"><strong>{{matchPoints}}</strong></span> points/game)</div>
+                        <div class="row" ng-repeat="x in games">
+                            <div class="row">
+                                <div class="text-center h5 ">
+                                    <strong>
+                                        <span ng-class="{'text-muted':x.IsGameLocked}">
+                                            <span ng-bind="(x.GameTime | date:'shortTime') +' '"></span>
+                                            <span ng-if="x.IsGameLocked" style="color:#ff4d4d;">(LOCKED)</span>
+                                        </span>
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading text-center team-name-panel-header"><span ng-class="{'locked-team-name':x.IsGameLocked}">{{x.Team1Name}}</span></div>
+                                    <div id = 'divMatch{{x.MatchID}}_{{x.Team1ID}}' class="panel-body text-center team-logo-panel-container" ng-class="{'locked-panel':x.IsGameLocked}" ng-click="div_click(x.MatchID,x.Team1ID,x.Team1Name,x.Team2ID,x.IsGameLocked)">
+                                        <div class="row"><img ng-src="{{x.Team1LogoUrl}}" alt="{{x.Team1Name}}" style="width:72px;height:42px;" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Disable for group of 16 onwards (remember to update div col size to "col-sm-4" for the other two team choices above and below)-->
+                           <!--<div class="col-sm-4">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading text-center team-name-panel-header"><span ng-class="{'locked-team-name':x.IsGameLocked}">DRAW</span></div>
+                                    <div id = 'divMatch{{x.MatchID}}_50' class="panel-body text-center team-logo-panel-container" ng-class="{'locked-panel':x.IsGameLocked}" ng-click="div_click(x.MatchID,x.Team1ID,'Draw',x.Team2ID,x.IsGameLocked)">
+                                        <div class="row"><img ng-src="https://kidavalanche.files.wordpress.com/2010/02/p1010018.jpg" alt="DRAW" style="width:72px;height:42px;" /></div>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="col-sm-6">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading text-center team-name-panel-header"><span ng-class="{'locked-team-name':x.IsGameLocked}">{{x.Team2Name}}</span></div>
+                                    <div id = 'divMatch{{x.MatchID}}_{{x.Team2ID}}' class="panel-body text-center team-logo-panel-container" ng-class="{'locked-panel':x.IsGameLocked}" ng-click="div_click(x.MatchID, x.Team2ID,x.Team2Name,x.Team1ID,x.IsGameLocked)">
+                                        <div class="row"><img ng-src="{{x.Team2LogoUrl}}" alt="{{x.Team2Name}}" style="width:72px;height:42px;" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="nogames" style="padding-bottom: 40px;" class="col-sm-8 col-md-offset-3">
+                            <span >There are currently no active games available</span>
+                        </div>
+                        <div ng-hide="nogames || loadingGames" class="col-md-12" style="padding-top: 20px;">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-4">
+                                <button class="btn btn-lg btn-primary btn-block" ng-class="{'psoft-submit-disabled-button':!allValidPredictionsReceived}" type="submit" ng-disabled=!allValidPredictionsReceived ng-click="submitPoll()">
+                                    Submit
+                                </button>
+                            <div class="col-sm-4"></div>
+                        </div>
+                    </div>
+                    <!--<div ng-show="lockDown" class="alert alert-success">-->
+                        <!--<div>NOTE: Predictions from other players will be visible after prediction lockdown for semifinals and finals</div>-->
+                    <!--</div>-->
+                    <div>&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--Prediction List-->
+                <div class="col-sm-8">
+                    <div ng-hide="nogames">
+                        <div ng-controller="predListController">
+                            <div class="h1">
+                                <span class="psoft-euro-emphasis-text">Prediction list</span>
+                                <span ng-if="showDateRemaining(matchDateTime)" class="h5">
+                                    (Time remaining: <timer end-time='matchDateTime'><span>{{days}} days </span>{{hhours}}:{{mminutes}}:{{sseconds}}</timer>)
+                                </span>
+                            </div>
+                            <div class="row" style="padding: 0 0 20px 20px;">
+                                <div class="col-offset-sm-4"></div>
+                                <div ng-if="true" class="col-sm-8">
+                                    <select ng-model="pgSelectedGame" ng-change="filterPredictionList(pgSelectedGame)">
+                                        <option value="" >All Matches</option>
+                                        <option ng-repeat="x in games" value="{{x}}">
+                                            {{x.GameTime}} - {{x.Team1Name}} vs {{x.Team2Name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div ng-if="true" class="col-sm-8"><mark>[{{predictionsRemaining}} prediction(s) remaining for the next upcoming match)]</mark></div>
+                            </div>
+                            <div ng-hide="predictionGridLoaded"><span class="h5"><img src="/web/assets/img/loading.gif" /> Refreshing...</span></div>
+                            <div ng-show="predictionGridLoaded" ui-grid="predictionGrid"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <!-- Leaderboard column -->
+                    <div>
+                        <div class="text-center h1 psoft-euro-emphasis-text">Scoreboard</div>
+                        <div ng-controller="scoreboardController">
+                            <div ui-grid="scoreGrid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

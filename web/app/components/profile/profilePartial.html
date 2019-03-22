@@ -1,0 +1,38 @@
+<div class="container">
+	  	<div class="psoft2-compiled">
+	  		<div class="well">
+ 				<div class="page-header text-success">
+ 					<h1>{{name}} ({{points}} points)</h1>
+ 				</div>
+	  			<div ng-show="!gameHistory.length" class="row text-center">Fetching...<img src="/web/assets/img/loading.gif" /></div>
+ 				<div ng-show="gameHistory.length" class="row text-left">
+	  				<table class="table table-striped">
+	  					<thead class="text-primary">
+	  						<tr class="text-center">
+	  							<th>#</th>
+	  							<th>Match Date</th>
+	  							<th>Team 1</th>
+	  							<th>Team 2</th>
+	  							<th>Predicted Team</th>
+	  							<th>Winning Team</th>
+	  							<!--<th>Result</th>-->
+	  							<th>Points</th>
+	  						</tr>
+	  					</thead>
+	  					<tbody>
+	  						<tr class="text-left" ng-repeat="x in gameHistory">
+	  							<td class="highlight-team">{{$index+1}}</td>
+	  							<td class="highlight-team">{{x.match_date | date:'MM-dd-yyyy'}}</td>
+	  							<td class="highlight-team">{{x.team1}}</td>
+	  							<td class="highlight-team">{{x.team2}}</td>
+								<td><span class="highlight-team" ng-class="(x.predicted_team===x.winning_team) ? 'label label-success' : 'label label-warning'">{{x.predicted_team}}</span></td>
+								<td class="highlight-team">{{x.winning_team}}</td>
+	  							<!--<td>{{x.result}}</td>-->
+	  							<td>{{getDisplayPoints(x.predicted_team, x.winning_team,x.game_weight)}}</td>
+								<!--<td>{{x.game_weight}}</td>-->
+	  						</tr>
+	  					</tbody>
+	  				</table>				  					
+	  			</div>		  		
+	  		</div>
+	  	</div>

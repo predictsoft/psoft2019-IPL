@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>NWA Fantasy App - 2018 FIFA World Cup Russia</title>
+    <script src="/web/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/web/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/web/node_modules/angular/angular.min.js"></script>
+    <script src="/web/node_modules/angular-route/angular-route.min.js"></script>
+    <script src="/web/node_modules/angular-md5/angular-md5.min.js"></script>
+    <script src="/web/node_modules/angular-ui-grid/ui-grid.min.js"></script>
+    <script src="/web/node_modules/angular-timer/dist/assets/js/angular-timer-all.min.js"></script>
+    <script src="/web/node_modules/angular-jwt/dist/angular-jwt.min.js"></script>
+
+    <script src="/web/app/app.module.js"></script>
+    <script src="/web/app/app.routes.js"></script>
+
+    <script src="/web/app/shared/userService.js"></script>
+    <script src="/web/app/shared/authService.js"></script>
+    <script src="/web/app/shared/gameService.js"></script>
+
+    <script src="/web/app/components/login/loginController.js"></script>
+    <script src="/web/app/components/poll/pollController.js"></script>
+    <script src="/web/app/components/poll/scoreboardController.js"></script>
+    <script src="/web/app/components/poll/predListController.js"></script>
+    <script src="/web/app/components/register/registerController.js"></script>
+    <script src="/web/app/components/profile/profileController.js"></script>
+
+<!--
+        <script src="/app/shared/gameService.js"></script>
+        <script src="/app/controllers/userController.js"></script>
+        <script src="/app/controllers/gameController.js"></script>
+    -->
+
+    <link rel="stylesheet" href="/web/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/web/node_modules/angular-ui-grid/ui-grid.min.css" />
+    <link rel="stylesheet" href="/web/node_modules/angular-timer/dist/assets/css/angular-timer-bower.css" />
+    <link rel="stylesheet" href="/web/assets/css/login.css" />
+    <link rel="stylesheet" href="/web/assets/css/psoft_compiled.css" />
+</head>
+<body ng-app="psoftUI">
+    <!--Navbar-->
+    <div ng-include='"/web/app/shared/pageHeaderPartial.html"' ng-controller="loginController">
+    </div>
+    <!--main body-->
+    <section ng-view></section>
+    <hr />
+    <div ng-include='"/web/app/shared/pageFooterPartial.html"'>
+    </div>
+</body>
+</html>
