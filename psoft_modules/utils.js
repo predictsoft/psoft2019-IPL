@@ -58,6 +58,7 @@ var Utils = module.exports = {
         psIsRegistrationActive: false,
         psRunMode: '',
         psManualLockThreshold: '',
+        psHidePredictionMode: false,
         psTZOffset: 0,     //timezone offset (use to convert time in DB into this offset when running compare queries
         /* init(): if this function fails, the application will quit with a message to the console */
         init: function () {
@@ -77,6 +78,7 @@ var Utils = module.exports = {
                 this.psLogLevel = psoftConfig.log_level || '';
 
                 this.psManualLockThreshold = psoftConfig.match_lock_threshold_in_minutes || '15';     //15 minute by default
+                this.psHidePredictionMode = psoftConfig.hide_predictions_until_lockdown || false;     //whether to hide others' predictions until lockdown
 
                 //setup log config
                 this.psLogDir = psoftConfig.log_directory_name || 'psoftv3_logs';
