@@ -58,7 +58,7 @@ module.exports = {
                     "P.playerID = " + userID
     },
     getUserScores: function(){
-        return "SELECT u.userID, u.name, u.points as points FROM users u ORDER BY u.points DESC;";
+        return "SELECT u.userID, u.name, u.points as points FROM users u WHERE name <> '[admin]' ORDER BY u.points DESC;";
     },
     getUserScoresFixed: function(userID){
         return "SELECT u.userID, u.name, COUNT(*) * 3 as points " +
