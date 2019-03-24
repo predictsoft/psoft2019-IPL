@@ -1,18 +1,43 @@
 <div class="container">
-    <form class="form-signin" ng-submit="login()" name="loginForm">
-        <h2 class="form-heading">Please sign in</h2>
-        <div>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input ng-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <form class="form-signin" ng-submit="login()" name="loginForm">
+    <h2 class="form-heading">Please sign in</h2>
+    <div>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input
+        ng-model="email"
+        type="email"
+        id="inputEmail"
+        class="form-control"
+        placeholder="Email address"
+        required
+        autofocus
+      />
 
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input ng-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <span class="label label-danger" ng-hide="is_valid">{{message}}</span>
-        </div>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input
+        ng-model="password"
+        type="password"
+        id="inputPassword"
+        class="form-control"
+        placeholder="Password"
+        required
+      />
+      <span class="label label-danger" ng-hide="is_valid">{{ message }}</span>
+    </div>
 
-        <div class="form-remember-me-text checkbox"><label><input type="checkbox" ng-model="savelogin" /><span>Remember me</span></label></div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in<span ng-show="is_waiting"><img src="/web/assets/img/loading.gif"></span></button>
-    </form>
-    <!-- Disable login after registration deadline -->
-    <div class="register-link"><a href="index.html#!/register">Register a new account</a></div>
+    <div class="form-remember-me-text checkbox">
+      <label
+        ><input type="checkbox" ng-model="savelogin" /><span
+          >Remember me</span
+        ></label
+      >
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">
+      Sign in<span ng-show="is_waiting"
+        ><img src="/web/assets/img/loading.gif"
+      /></span>
+    </button>
+  </form>
+  <!-- Disable login after registration deadline -->
+  <!-- <div class="register-link"><a href="index.html#!/register">Register a new account</a></div> -->
 </div>
