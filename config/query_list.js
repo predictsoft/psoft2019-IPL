@@ -58,7 +58,7 @@ module.exports = {
                     "P.playerID = " + userID
     },
     getUserScores: function(){
-        return "SELECT u.userID, u.name, u.points as points FROM users u ORDER BY u.points DESC;";
+        return "SELECT u.userID, u.name, u.points as points FROM users u WHERE name <> '[admin]' ORDER BY u.points DESC;";
     },
     getUserScoresFixed: function(userID){
         return "SELECT u.userID, u.name, COUNT(*) * 3 as points " +
@@ -71,12 +71,15 @@ module.exports = {
     "GROUP BY u.userid "+
     "ORDER BY points DESC;";
     },
-    getPredictionStats: function(){
-        return "SELECT COUNT(*) as predictions_received, " +
+    getPredictionStatsQuery: function(checkForHidden = false){
+        var query =  "SELECT COUNT(*) as predictions_received, " +
         "(SELECT COUNT(*) from users u) as total_players " +
         "FROM predictions p " + 
-        "WHERE p.matchID = (SELECT ID from games where isActive=1 AND isHidden=1 " +
+        "WHERE p.matchID = (SELECT ID from games where isActive=1 " + ((checkForHidden===true)?" AND isHidden=1 " :"" )+
+        //(checkForHidden===true)?" AND isHidden=1 ":"" +
         "ORDER BY matchDate, matchTime ASC LIMIT 1);"
+
+        return query;
     },
     getNextUpcomingMatchDetail: function(search_window_in_minutes, server_timezone_offset){
         if(!server_timezone_offset){

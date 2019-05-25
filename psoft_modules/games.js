@@ -202,12 +202,14 @@ var TFGames = {
 
     /* GET the total number of players and number of remaining predictions */
     getPredictionStats: function(req,res){
+        
         database.query(
-            queries.getPredictionStats(),
+            queries.getPredictionStatsQuery(config.psHidePredictionMode),
             database.DBConnection.QueryTypes.SELECT
         )
         .then(predStats=>{
             
+            predStats[0]['total_players'] = predStats[0]['total_players'] - 1;      //takes the [admin] account out of the count
             res.status(200).json({
             success : true,
             message : "OK",

@@ -12,6 +12,7 @@ module.exports = {
     app_description: '',
     app_environment: 'Dev',
     log_directory_name  : 'psoftv3_logs',
+    hide_predictions_until_lockdown: false,
     //admin config ahead
     r00t_port: 8999,
     allow_registration: true,                       //'true' to allow new user registration
